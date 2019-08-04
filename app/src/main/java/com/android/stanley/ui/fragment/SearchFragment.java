@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ import com.android.stanley.utils.AppUtils;
 import com.android.stanley.utils.LogUtils;
 import com.android.stanley.viewmodel.SearchActivityViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,14 +73,15 @@ public class SearchFragment extends Fragment {
      */
     private void initViewModel() {
         if(AppUtils.isConnectionAvailable(getActivity())) {
+
             SearchActivityViewModel searchActivityViewModel = ViewModelProviders.of(this).get(SearchActivityViewModel.class);
             searchActivityViewModel.getMovieDataList(ev_search.getText().toString());
 
             final Observer<List<MovieDetailsModel>> listObserver = new Observer<List<MovieDetailsModel>>() {
                 @Override
                 public void onChanged(@Nullable final List<MovieDetailsModel> updatedList) {
-
                     LogUtils.log(TAG, "SearchFragment onChanged called : updatedList : " + updatedList);
+
                     if (updatedList != null && updatedList.size() > 0) {
                         recyclerView.setVisibility(View.VISIBLE);
                         tvNoResult.setVisibility(View.GONE);
@@ -106,7 +109,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //initViewModel();
     }
 
     @Override
@@ -161,7 +163,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(ev_search != null && !TextUtils.isEmpty(ev_search.getText().toString()) && ev_search.getText().toString().length() > 3) {
+                if(ev_search != null && !TextUtils.isEmpty(ev_search.getText().toString()) && ev_search.getText().toString().length() > 1) {
                     initViewModel();
                 }
             }

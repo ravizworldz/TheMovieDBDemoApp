@@ -36,6 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void setUpdatedData( List<MovieDetailsModel> dataList) {
         this.dataList = dataList;
+       // notifyDataSetChanged();
     }
 
 

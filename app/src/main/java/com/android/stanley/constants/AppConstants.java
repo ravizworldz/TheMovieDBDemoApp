@@ -16,7 +16,7 @@ public class AppConstants {
     public static  final String FROM =  "from";
     public static  final String DATA =  "data";
     public static  final String LANGUAGE =  "en-US";
-    public static  final String PAGE =  "1";
+    public static  final int PAGE =  1;
     public static  final String APP_DB_NAME =  "movie_database";
 
 }
